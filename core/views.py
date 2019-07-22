@@ -1,3 +1,4 @@
+from django.shortcuts import render
 import random
 import string
 
@@ -8,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
 
@@ -177,9 +178,9 @@ class CheckoutView(View):
                 else:
                     messages.warning(self.request, "Invalid payment option selected")
                     return redirect('core:checkout')
-                except ObjectDoesNotExist:
-                    messages.warning(self.request, "You do not have an active order")
-                    return redirect("core:order-summary")
+        except ObjectDoesNotExist:
+            messages.warning(self.request, "You do not have an active order")
+            return redirect("core:order-summary")
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
