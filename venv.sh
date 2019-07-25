@@ -27,17 +27,17 @@ sudo chmod 775 --recursive /var/www/
 git config --global core.autocrlf input
 
 cd /var/repo/"$projectgit"/
-git clone https://github.com/codingforentrepreneurs/CFE-Blank-Project . --bare
+git clone git@github.com:DaveCheez/DjangoBoiler.git . --bare
 git --work-tree="/var/www/$projectslug" --git-dir="/var/repo/$projectgit" checkout -f
 virtualenv -p python3.6 /var/www/"$projectslug"
 cd /var/www/"$projectslug"/
 
-"$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/src/requirements.txt
+"$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/requirements.txt
 
-cat <<EOT >> /var/repo/"$projectgit"/hook/post-receive
+cat <<EOT >> /var/repo/"$projectgit"/hookS/post-receive
 git --work-tree=/var/www/"$projectslug" --git-dir=/var/repo/"$projectgit" checkout -f
 
-"$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/src/requirements.txt
+"$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/requirements.txt
 
 supervisorctl reread
 supervisorctl update
