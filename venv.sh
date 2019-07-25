@@ -13,7 +13,6 @@ echo
 echo "Use default blank django project? (y/n)"
 read defaultDjangoProject
 defaultDjangoProjectResponse="$(echo -n '${defaultDjangoProject}' | sed -e 's/[^[:alnum:]]/-/g' | tr -s '_' | tr A-Z a-z)"
-echo "${defaultDjangoProject}"
 
 sudo mkdir /var/www/"$projectslug"/
 cd ~/
@@ -31,8 +30,7 @@ cd /var/repo/"$projectgit"/
 git clone https://github.com/codingforentrepreneurs/CFE-Blank-Project . --bare
 git --work-tree="/var/www/$projectslug" --git-dir="/var/repo/$projectgit" checkout -f
 virtualenv -p python3.6 /var/www/"$projectslug"
-cd /var/www/"$projectslug"/src/
-sudo rm -rf /var/www/"$projectslug"/src/cfehome/
+cd /var/www/"$projectslug"/
 
 "$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/src/requirements.txt
 
@@ -40,7 +38,6 @@ cat <<EOT >> /var/repo/"$projectgit"/hook/post-receive
 git --work-tree=/var/www/"$projectslug" --git-dir=/var/repo/"$projectgit" checkout -f
 
 "$virtualenvbin"/python3 -m pip install -r /var/www/"$projectslug"/src/requirements.txt
-sudo rm -rf /var/www/"$projectslug"/src/cfehome/
 
 supervisorctl reread
 supervisorctl update
