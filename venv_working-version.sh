@@ -1,11 +1,11 @@
 export PROJECT_SLUG=pyshop
-export projectgit=${projectslug}.git
+export PROJECT_GIT=${PROJECT_SLUG}.git
 export projectDB=${projectslug}_db
 export USERNAME=davecheez
 export projectDBuser=${USERNAME}_user
 export localip="34.76.126.193"
 export GIT_DIR=${HOME}/repo/${projectgit}/
-export GIT_WORK_TREE=${HOME}/src/$PROJECT_SLUG/
+export GIT_WORK_TREE=$HOME/src/$PROJECT_SLUG/
 export VENVBIN=${HOME}/src/${projectslug}/bin
 
 echo
