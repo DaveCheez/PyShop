@@ -28,7 +28,7 @@ git config --global core.autocrlf input
 
 cd $GIT_DIR
 
-git clone git@github.com/DaveCheez/PyShop.git . --bare
+git clone git@github.com:DaveCheez/PyShop.git . --bare
 git --work-tree=$GIT_WORK_TREE --git-dir=${GIT_DIR} checkout -f
 python -m venv $VENVBIN
 cd $GIT_WORK_TREE
